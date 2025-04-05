@@ -1,0 +1,61 @@
+[C] : Composition
+
+
++-------------------+       +------------------+  [C]   +------------------+
+|   ParkingManager  |-------|     ParkingLot   |--------|   ParkingSpace   |
++-------------------+       +------------------+        +------------------+
+| - parkingLot      |       | - spaces         |        | - spaceId        |
+|                   |       | - lock           |        | - isOccupied     |
+| + parkVehicle()   |       | + parkVehicle()  |        | - vehicle        |
+| + processExit()   |       | + processExit()  |        | + occupy()       |
++-------------------+       | + getAvailableSpace() |   | + release()      |
+                            | + releaseSpace() |        | + isOccupied()   |
+                            +------------------+        +------------------+
+                                       |
+                                       | 1..* [C]
+                                       |                                          +---------------------+
+                                       |                                          |       Vehicle       |
+                                       |                                          +---------------------+
+                                       |                                          | - vehicleId         |
+                                       |                                          | - licensePlate      |
+                                       |                                          | - type              |
+                           +---------------------+                               +---------------------+
+                           |        Ticket       |                                             |
+                           +---------------------+                                             |1..1
+                           | - ticketId          |                                             |
+                           | - vehicle           |                                             |
+                           | - parkingSpace      |                                             |
+                           | - entryTime         |- - - - - - - - - - - - - - - - - - - - - - -|
+                           | - exitTime          |
+                           | - fee               |
+                           | + setExitTime()     |
+                           | + calculateFee()    |
+                           +---------------------+
+                                       |
+                                       | 1..1 [Aggregation]
+                                       |
+                           +---------------------+
+                           |       Payment       |
+                           +---------------------+
+                           | - ticket            |
+                           | - fee               |
+                           | + processPayment()  |
+                           +---------------------+
+
+ParkingManager → ParkingLot:
+ParkingManager manages the ParkingLot, which contains the parking spaces.
+
+ParkingLot → ParkingSpace:
+ParkingLot contains multiple ParkingSpace instances.
+
+ParkingLot → Ticket:
+When a vehicle parks, ParkingLot generates a Ticket that contains the details about the vehicle, the parking space, and the time information.
+
+Ticket → Vehicle:
+The Ticket references the Vehicle parked, which allows the system to track the vehicle's entry and exit.
+
+Ticket → ParkingSpace:
+The Ticket also references the ParkingSpace the vehicle occupies.
+
+Ticket → Payment:
+The Payment class is associated with the Ticket, as the payment is processed based on the ticket's information (including the fee, entry time, and exit time).
