@@ -10,10 +10,10 @@ public class Payment {
 
     }
 
-    //return transactionId. We can have different mode of payment
-    public int processPayment(double fee, int ticketId) {
+    //We can have different mode of payment
+    public boolean processPayment(double fee, int ticketId) {
         this.fee = fee;
         this.ticketId = ticketId;
-        return new Random().nextInt();
+        return true;
     }
 }

@@ -57,16 +57,14 @@ public class ParkingLot {
         return null;
     }
 
-    public int processExit(Ticket ticket) {
+    public double processExit(Ticket ticket) {
         assert ticket!=null : "please provide ticket details";
         //Preconditions.checkNotNull(ticket);
         long entryTime = ticket.getEntryTime();
         ticket.setExitTime(System.currentTimeMillis());
         double parkedCharges = getParkedCharges(entryTime, ticket.getExitTime());
         //we can have different mode of payment new UpiPayment(), new ScanQR(), new CashPayment() etc
-        Payment payment = new Payment();
-        int transactionNumber = payment.processPayment(parkedCharges, ticket.getTicketId());
-        return transactionNumber;
+        return parkedCharges;
     }
 
     private double getParkedCharges(long entyTime, long exitTime) {

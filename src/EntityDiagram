@@ -2,7 +2,7 @@
 
 
 +-------------------+       +------------------+  [C]   +------------------+
-|   ParkingManager  |-------|     ParkingLot   |--------|   ParkingSpace   |
+|ParkingManager(Main)|------|     ParkingLot   |--------|   ParkingSpace   |
 +-------------------+       +------------------+        +------------------+
 | - parkingLot      |       | - spaces         |        | - spaceId        |
 |                   |       | - lock           |        | - isOccupied     |

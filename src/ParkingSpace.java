@@ -1,10 +1,10 @@
 public class ParkingSpace {
-    int parkingId;
+    int spaceId;
     boolean isOccupied;
     Vehicle vehicle;
 
     public ParkingSpace(int parkingId) {
-        this.parkingId = parkingId;
+        this.spaceId = parkingId;
     }
     public boolean isOccupied() {
         return isOccupied;
