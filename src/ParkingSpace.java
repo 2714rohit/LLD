@@ -3,11 +3,20 @@ public class ParkingSpace {
     boolean isOccupied;
     Vehicle vehicle;
 
-    public boolean getIsOccupied() {
+    public ParkingSpace(int parkingId) {
+        this.parkingId = parkingId;
+    }
+    public boolean isOccupied() {
         return isOccupied;
     }
 
-    public void occupy() {
+    public void occupy(Vehicle vehicle) {
         this.isOccupied = true;
+        this.vehicle = vehicle;
+    }
+
+    public void release() {
+        isOccupied = false;
+        vehicle = null;
     }
 }
